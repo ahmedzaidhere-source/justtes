@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zlvon - Thrifted. Curated.</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Top Announcement Bar -->
+    <div class="top-announcement">
+        FREE SHIPPING ON ALL ORDERS
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="main-header">
+        <div class="logo"><img src="Picsart_26-07-20_17-01-26-218.png" alt="Zlvon Logo" style="filter: invert();"></div>
+        <nav class="nav-links">
+            <a href="#" class="active">HOME</a>
+            <a href="#product-display">SHOP</a>
+            <a href="#category-section">COLLECTIONS</a>
+            <a href="#">ABOUT US</a>
+            <a href="#">CONTACT</a>
+        </nav>
+        <div class="header-icons">
+            <a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+            <a href="#"><i class="fa-regular fa-user"></i></a>
+            <button class="cart-icon-btn" onclick="openCartDrawer()">
+                <i class="fa-solid fa-bag-shopping"></i>
+                <span class="badge" id="cartBadgeCount">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <span class="sub-title">NEW ARRIVALS</span>
+            <h1>ROYAL<br>MINIMALIST</h1>
+            <p>Premium thrifted pieces. Handpicked for quality. Priced for you.</p>
+            <a href="#product-display" class="btn-primary">SHOP NOW</a>
+        </div>
+    </section>
+
+    <!-- Features Bar -->
+    <section class="features-bar">
+        <div class="feature-item">
+            <i class="fa-solid fa-truck"></i>
+            <div>
+                <h4>FREE SHIPPING</h4>
+                <p>On all orders</p>
+            </div>
+        </div>
+        <div class="feature-item">
+            <i class="fa-solid fa-award"></i>
+            <div>
+                <h4>PREMIUM QUALITY</h4>
+                <p>Handpicked & quality checked</p>
+            </div>
+        </div>
+        <div class="feature-item">
+            <i class="fa-solid fa-box-open"></i>
+            <div>
+                <h4>EASY RETURNS</h4>
+                <p>Hassle-free returns</p>
+            </div>
+        </div>
+        <div class="feature-item">
+            <i class="fa-solid fa-headset"></i>
+            <div>
+                <h4>24/7 SUPPORT</h4>
+                <p>We're here to help</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop By Category -->
+    <section class="section-container" id="category-section">
+        <h2 class="section-title">SHOP BY CATEGORY</h2>
+        <div class="category-grid">
+            <div class="category-card" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('long-wallet.jfif');">
+                <div class="cat-content">
+                    <h3>LONG WALLET</h3>
+                    <a href="#product-display" class="btn-underline" onclick="showCategory('long-wallet')">EXPLORE NOW</a>
+                </div>
+            </div>
+            <div class="category-card" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('CARDHOLDER.jpg');">
+                <div class="cat-content">
+                    <h3>CARDHOLDER</h3>
+                    <a href="#product-display" class="btn-underline" onclick="showCategory('cardholder')">EXPLORE NOW</a>
+                </div>
+            </div>
+            <div class="category-card" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('leather.jfif');">
+                <div class="cat-content">
+                    <h3>LEATHER</h3>
+                    <a href="#product-display" class="btn-underline" onclick="showCategory('leather')">EXPLORE NOW</a>
+                </div>
+            </div>
+            
+            <div class="category-card" style="background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('Mens Premium Wallet - Velour.jfif');">
+                <div class="cat-content">
+                    <h3>CLASSIC WALLET</h3>
+                    <a href="#product-display" class="btn-underline" onclick="showCategory('classic-wallet')">EXPLORE NOW</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dynamic Category Display Section -->
+    <section class="section-container" id="product-display">
+        <h2 class="section-title" id="display-title">FEATURED PRODUCTS</h2>
+        <div class="products-grid" id="products-container"></div>
+    </section>
+
+    <!-- Slide-Out Shopping Cart Drawer -->
+    <div id="cartDrawer" class="cart-drawer-overlay">
+        <div class="cart-drawer">
+            <div class="cart-drawer-header">
+                <h3>YOUR CART (<span id="drawerCartCount">0</span>)</h3>
+                <button class="drawer-close-btn" onclick="closeCartDrawer()">&times;</button>
+            </div>
+
+            <div class="cart-drawer-body" id="cartItemsList">
+                <!-- Cart Items Render Here -->
+            </div>
+
+            <div class="cart-drawer-footer">
+                <div class="subtotal-row">
+                    <span>Subtotal:</span>
+                    <span id="cartSubtotal">Rs. 0</span>
+                </div>
+                <button class="btn-primary btn-block" onclick="openCheckoutModal()">PROCEED TO CHECKOUT</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkoutModal" class="modal-overlay">
+        <div class="modal-container checkout-container">
+            <button class="modal-close" onclick="closeCheckoutModal()">&times;</button>
+            <h2 class="checkout-heading">CHECKOUT</h2>
+            
+            <form id="checkoutForm" onsubmit="handleOrderSubmission(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="custName" required placeholder="Ali Khan">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number (WhatsApp)</label>
+                    <input type="tel" id="custPhone" required placeholder="03001234567">
+                </div>
+                <div class="form-group">
+                    <label>Shipping Address</label>
+                    <textarea id="custAddress" required placeholder="House #, Street, City"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Payment Method</label>
+                    <select id="payMethod">
+                        <option value="COD">Cash on Delivery (COD)</option>
+                        <option value="WhatsApp">Direct WhatsApp Confirmation</option>
+                    </select>
+                </div>
+
+                <div class="order-summary-box">
+                    <h4>Order Summary</h4>
+                    <p>Total Items: <span id="summaryCount">0</span></p>
+                    <p class="total-price-text">Total Price: <span id="summaryTotal">Rs. 0</span></p>
+                </div>
+
+                <button type="submit" class="btn-primary btn-block">PLACE ORDER</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Product Detail Selection Modal -->
+    <div id="productDetailModal" class="modal-overlay">
+        <div class="modal-container">
+            <button class="modal-close" onclick="closeProductDetail()">&times;</button>
+            <div class="modal-grid">
+                <div class="gallery-container">
+                    <div class="main-image-wrapper">
+                        <img id="modalMainImg" src="" alt="Product Image" class="main-image">
+                    </div>
+                    <div class="thumbnails-grid" id="modalThumbnails"></div>
+                </div>
+
+                <div class="product-details">
+                    <h1 class="product-title" id="modalTitle">Product Title</h1>
+                    <div class="price-display" id="modalPrice">Rs. 0</div>
+                    <p class="product-description" id="modalDesc">Product description...</p>
+
+                    <div class="color-selector">
+                        <div class="section-title">
+                            Color: <span class="selected-color-name" id="modalColorLabel">Default</span>
+                        </div>
+                        <div class="color-options-grid" id="modalSwatches"></div>
+                    </div>
+
+                    <div class="quantity-section">
+                        <span class="section-title">Quantity</span>
+                        <div class="quantity-control">
+                            <button class="qty-btn" onclick="adjustModalQty(-1)">-</button>
+                            <span class="qty-value" id="modalQty">1</span>
+                            <button class="qty-btn action-black" onclick="adjustModalQty(1)">+</button>
+                        </div>
+                    </div>
+
+                    <div class="cta-buttons-grid">
+                        <button class="btn-primary" onclick="addModalProductToCart()">ADD TO CART</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Live Purchase Notification Toast -->
+    <div id="sales-notification" class="sales-toast">
+        <div class="toast-img-wrapper">
+            <img id="toast-img" src="" alt="Product Image">
+        </div>
+        <div class="toast-details">
+            <p class="toast-buyer"><span id="toast-name">Someone</span> from <span id="toast-location">Pakistan</span> purchased</p>
+            <p id="toast-product" class="toast-title">Leather Cardholder</p>
+            <span id="toast-time" class="toast-time">Just now</span>
+        </div>
+        <button class="toast-close" onclick="closeNotification()">&times;</button>
+    </div>
+
+    <!-- Cart Toast Notification -->
+   <div id="toast" class="toast-notification">
+    <i class="fa-solid fa-circle-check" style="color: #e0e0e0;"></i>
+    <span id="toastMsg">Item added to cart!</span>
+</div>
+
+<!-- Promotion Banner with Live Countdown Timer -->
+<section class="promo-countdown-bar">
+    <div class="promo-countdown-container">
+        <div class="promo-text-content">
+            <span class="promo-badge">LIMITED TIME SALE</span>
+            <h2>FLAT 30% OFF ALL LEATHER WALLETS</h2>
+            <p>Don't miss out! Special offer ends soon.</p>
+        </div>
+        
+        <div class="countdown-timer" id="saleCountdown">
+            <div class="timer-box">
+                <span id="timer-hours">08</span>
+                <p>Hours</p>
+            </div>
+            <span class="timer-colon">:</span>
+            <div class="timer-box">
+                <span id="timer-minutes">45</span>
+                <p>Mins</p>
+            </div>
+            <span class="timer-colon">:</span>
+            <div class="timer-box">
+                <span id="timer-seconds">30</span>
+                <p>Secs</p>
+            </div>
+        </div>
+
+        <a href="#product-display" class="btn-primary promo-btn">CLAIM DISCOUNT NOW</a>
+    </div>
+</section>
+<!-- Updated Footer Section with Contact Info -->
+<footer class="main-footer">
+    <div class="footer-container">
+        <!-- Brand Info -->
+        <div class="footer-brand">
+            <div class="logo"><img src="Picsart_26-07-20_17-01-26-218.png" alt="ZLVON Logo" style="filter: invert();"></div>
+            <p>Thrifted culture. Curated style. Handcrafted leather pieces with a past, made for the present.</p>
+            <div class="social-icons">
+                <a href="https://www.instagram.com/zlvon_inc" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/zlvon" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://wa.me/923404122968" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-links">
+            <h4>SHOP</h4>
+            <a href="#product-display" onclick="showCategory('long-wallet')">Long Wallets</a>
+            <a href="#product-display" onclick="showCategory('cardholder')">Cardholders</a>
+            <a href="#product-display" onclick="showCategory('leather')">Genuine Leather</a>
+            <a href="#product-display" onclick="showCategory('classic-wallet')">Classic Bifolds</a>
+        </div>
+
+        <!-- Help & Company -->
+        <div class="footer-links">
+            <h4>HELP & SUPPORT</h4>
+            <a href="#">Order Tracking</a>
+            <a href="#">Shipping Policy</a>
+            <a href="#">Returns & Exchanges</a>
+            <a href="#">FAQs</a>
+        </div>
+
+        <!-- Contact Info Section -->
+        <div class="footer-contact">
+            <h4>GET IN TOUCH</h4>
+            <ul class="contact-info-list">
+                <li>
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Main Boulevard, Gulberg III, Lahore, Pakistan</span>
+                </li>
+                <li>
+                    <i class="fa-solid fa-phone"></i>
+                    <a href="tel:+923404122968">+92 340 4122968</a>
+                </li>
+                <li>
+                    <i class="fa-solid fa-envelope"></i>
+                    <a href="mailto:support@ZLVONleather.com">support@ZLVONleather.com</a>
+                </li>
+                <li>
+                    <i class="fa-solid fa-clock"></i>
+                    <span>Mon - Sat: 10:00 AM - 10:00 PM</span>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="footer-newsletter">
+            <h4>NEWSLETTER</h4>
+            <p>Get exclusive updates on new drops and member offers.</p>
+            <div class="newsletter-form">
+                <input type="email" placeholder="Enter your email">
+                <button type="submit"><i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        &copy; 2026 ZLVON. All rights reserved.
+    </div>
+</footer>
+    <script src="script.js"></script>
+</body>
+</html>
